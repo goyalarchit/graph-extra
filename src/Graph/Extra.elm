@@ -90,3 +90,12 @@ kruskal weightFn g =
 -- take all edges and sort them in order of their weights
 -- start picking edges till all nodes are added
 -- return
+{-
+   Add more algorithms
+   like problem types 8,9,10 in this blog
+   https://towardsdatascience.com/10-graph-algorithms-visually-explained-e57faa1336f3
+   8: Graph Colouring
+   9: Max Flow
+   10 : Matching
+
+-}
