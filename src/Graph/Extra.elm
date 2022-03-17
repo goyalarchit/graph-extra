@@ -2,6 +2,8 @@ module Graph.Extra exposing (alongAnyEdges, bellmanFord, kruskal)
 
 import Dict
 import Graph
+import Heap as H
+import IntDict as ID
 import List.Extra as LE
 
 
@@ -82,7 +84,72 @@ bellmanRelax ( u, v, w ) ( distancePathDict, updated ) =
 
 kruskal : (Graph.Edge e -> number) -> Graph.Graph n e -> Graph.Graph n e
 kruskal weightFn g =
-    Debug.todo "implement kruskal"
+    let
+        edges =
+            Graph.edges g |> List.filter (\edge -> edge.from /= edge.to)
+
+        forest =
+            Graph.nodeIds g |> List.map (\nid -> ( nid, nid )) |> ID.fromList
+
+        minHeap =
+            H.fromList (H.smallest |> H.by weightFn) edges
+
+        ( _, _, mstEdges ) =
+            addEdge ( minHeap, forest, [] )
+    in
+    Graph.fromNodesAndEdges (Graph.nodes g) mstEdges
+
+
+
+--  I N T E R N A L      H E L P E R S
+
+
+addEdge : ( H.Heap (Graph.Edge e), ID.IntDict Graph.NodeId, List (Graph.Edge e) ) -> ( H.Heap (Graph.Edge e), ID.IntDict Graph.NodeId, List (Graph.Edge e) )
+addEdge ( minHeap, forest, edges ) =
+    case H.pop minHeap of
+        Nothing ->
+            ( minHeap, forest, edges )
+
+        Just ( minWtEdge, newMinHeap ) ->
+            let
+                ( newForest, newEdges ) =
+                    if findSet minWtEdge.from forest /= findSet minWtEdge.to forest then
+                        ( union minWtEdge.from minWtEdge.to forest, minWtEdge :: edges )
+
+                    else
+                        ( forest, edges )
+            in
+            addEdge ( newMinHeap, newForest, newEdges )
+
+
+findSet : Graph.NodeId -> ID.IntDict Graph.NodeId -> Graph.NodeId
+findSet nodeId forest =
+    case ID.get nodeId forest of
+        Nothing ->
+            nodeId
+
+        Just parId ->
+            if nodeId == parId then
+                nodeId
+
+            else
+                findSet parId forest
+
+
+union : Graph.NodeId -> Graph.NodeId -> ID.IntDict Graph.NodeId -> ID.IntDict Graph.NodeId
+union a b forest =
+    let
+        root1 =
+            findSet a forest
+
+        root2 =
+            findSet b forest
+    in
+    if root1 /= root2 then
+        ID.update root1 (Maybe.map (\_ -> root2)) forest
+
+    else
+        forest
 
 
 
