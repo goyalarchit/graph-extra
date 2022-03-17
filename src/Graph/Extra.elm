@@ -21,7 +21,7 @@ alongAnyEdges nodeCtx =
         |> LE.unique
 
 
-bellmanFord : Graph.NodeId -> (Graph.Edge e -> number) -> Graph.Graph n e -> Maybe (Dict.Dict Graph.NodeId ( number, List Graph.NodeId ))
+bellmanFord : Graph.NodeId -> (Graph.Edge e -> number) -> Graph.Graph n e -> Result String (Dict.Dict Graph.NodeId ( number, List Graph.NodeId ))
 bellmanFord sourceId weightFn g =
     let
         weightedEdges =
@@ -38,10 +38,10 @@ bellmanFord sourceId weightFn g =
             List.foldl bellmanRelax ( shortestDistPathDict, False ) weightedEdges
     in
     if dictUpdated then
-        Nothing
+        Result.Err "Negative Weight Cycle Detected"
 
     else
-        Just shortestDistPathDict
+        Result.Ok shortestDistPathDict
 
 
 runBellmanRelax : Int -> List ( Graph.NodeId, Graph.NodeId, number ) -> Dict.Dict Graph.NodeId ( number, List Graph.NodeId ) -> Dict.Dict Graph.NodeId ( number, List Graph.NodeId )

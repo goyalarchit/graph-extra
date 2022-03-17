@@ -42,9 +42,9 @@ sampleGraph2 =
 bellmanExample : String
 bellmanExample =
     case GE.bellmanFord 0 (.label) sampleGraph2 of
-        Nothing ->
-            "Negative Weight Cycle Detected"
-        Just dpd ->
+        Result.Err err ->
+            err
+        Result.Ok dpd ->
             D.toList dpd 
             |> List.map (\(n,(d,p)) -> String.fromInt n ++ " : " ++ String.fromInt d )
             |> String.join " |#| "
