@@ -27,7 +27,7 @@ sampleGraph1 =
         ]
 
 
-sampleGraph2 : G.Graph () Float
+sampleGraph2 : G.Graph () Int
 sampleGraph2 =
     G.fromNodesAndEdges
         [ G.Node 0 ()
@@ -46,5 +46,5 @@ bellmanExample =
             "Negative Weight Cycle Detected"
         Just dpd ->
             D.toList dpd 
-            |> List.map (\(n,(d,p)) -> String.fromInt n ++ " : " ++ String.fromFloat d )
+            |> List.map (\(n,(d,p)) -> String.fromInt n ++ " : " ++ String.fromInt d )
             |> String.join " |#| "

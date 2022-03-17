@@ -21,7 +21,7 @@ alongAnyEdges nodeCtx =
         |> LE.unique
 
 
-bellmanFord : Graph.NodeId -> (Graph.Edge e -> Float) -> Graph.Graph n e -> Maybe (Dict.Dict Graph.NodeId ( Float, List Graph.NodeId ))
+bellmanFord : Graph.NodeId -> (Graph.Edge e -> number) -> Graph.Graph n e -> Maybe (Dict.Dict Graph.NodeId ( number, List Graph.NodeId ))
 bellmanFord sourceId weightFn g =
     let
         weightedEdges =
@@ -44,7 +44,7 @@ bellmanFord sourceId weightFn g =
         Just shortestDistPathDict
 
 
-runBellmanRelax : Int -> List ( Graph.NodeId, Graph.NodeId, Float ) -> Dict.Dict Graph.NodeId ( Float, List Graph.NodeId ) -> Dict.Dict Graph.NodeId ( Float, List Graph.NodeId )
+runBellmanRelax : Int -> List ( Graph.NodeId, Graph.NodeId, number ) -> Dict.Dict Graph.NodeId ( number, List Graph.NodeId ) -> Dict.Dict Graph.NodeId ( number, List Graph.NodeId )
 runBellmanRelax count weightedEdges distancePathDict =
     if count > 0 then
         let
@@ -61,7 +61,7 @@ runBellmanRelax count weightedEdges distancePathDict =
         distancePathDict
 
 
-bellmanRelax : ( Graph.NodeId, Graph.NodeId, Float ) -> ( Dict.Dict Graph.NodeId ( Float, List Graph.NodeId ), Bool ) -> ( Dict.Dict Graph.NodeId ( Float, List Graph.NodeId ), Bool )
+bellmanRelax : ( Graph.NodeId, Graph.NodeId, number ) -> ( Dict.Dict Graph.NodeId ( number, List Graph.NodeId ), Bool ) -> ( Dict.Dict Graph.NodeId ( number, List Graph.NodeId ), Bool )
 bellmanRelax ( u, v, w ) ( distancePathDict, updated ) =
     case Dict.get u distancePathDict of
         Nothing ->
@@ -80,7 +80,7 @@ bellmanRelax ( u, v, w ) ( distancePathDict, updated ) =
                         ( distancePathDict, updated )
 
 
-kruskal : (Graph.Edge e -> Float) -> Graph.Graph n e -> Graph.Graph n e
+kruskal : (Graph.Edge e -> number) -> Graph.Graph n e -> Graph.Graph n e
 kruskal weightFn g =
     Debug.todo "implement kruskal"
 
