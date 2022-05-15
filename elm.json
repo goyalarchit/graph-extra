@@ -1,7 +1,7 @@
 {
     "type": "package",
     "name": "goyalarchit/graph-extra",
-    "summary": "Sugiyama Style graph drawing in pure elm.",
+    "summary": "Convenience functions and random graph generator for working with elm-community/graph.",
     "license": "BSD-3-Clause",
     "version": "1.0.0",
     "exposed-modules": [
