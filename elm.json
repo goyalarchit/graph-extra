@@ -1,7 +1,7 @@
 {
     "type": "package",
     "name": "goyalarchit/graph-extra",
-    "summary": "Convenience functions and random graph generator for working with elm-community/graph.",
+    "summary": "Convenience functions/Random generators for working with elm-community/graph.",
     "license": "BSD-3-Clause",
     "version": "1.0.0",
     "exposed-modules": [
