@@ -1,4 +1,24 @@
-module Graph.Extra exposing (alongAnyEdges, bellmanFord, kruskal)
+module Graph.Extra exposing
+    ( alongAnyEdges
+    , bellmanFord
+    , kruskal
+    )
+
+{-| This module implements additional convenience functions to work with the
+[elm-community/graph](https://package.elm-lang.org/packages/elm-community/graph/latest/Graph)
+
+
+# Utility
+
+@docs alongAnyEdges
+
+
+# Algorithms
+
+@docs bellmanFord
+@docs kruskal
+
+-}
 
 import Dict
 import Graph
@@ -7,15 +27,8 @@ import IntDict as ID
 import List.Extra as LE
 
 
-{-| Utility
-
-1.  adjacentNodes : both incoming and outgoing edges
-
-Algorithms
-
-1.  Bellman Ford
-2.  Kruskals
-
+{-| A good default for selecting neighbors that go along outgoing edges
+or follow along incoming edges:
 -}
 alongAnyEdges : Graph.NeighborSelector n e
 alongAnyEdges nodeCtx =
@@ -23,6 +36,12 @@ alongAnyEdges nodeCtx =
         |> LE.unique
 
 
+{-| An implementation of bellman ford algorithm, for finding shortest path between
+single source and all vertices. Returns them as a dictionary or an error in Result type.
+
+_Note_: You may know error occurs in case there is a negative weight cycle.
+
+-}
 bellmanFord : Graph.NodeId -> (Graph.Edge e -> number) -> Graph.Graph n e -> Result String (Dict.Dict Graph.NodeId ( number, List Graph.NodeId ))
 bellmanFord sourceId weightFn g =
     let
@@ -82,6 +101,13 @@ bellmanRelax ( u, v, w ) ( distancePathDict, updated ) =
                         ( distancePathDict, updated )
 
 
+{-| This algorithms returns the minimum spanning tree for the given graph using Kruskal's algorithm.
+
+_Note_ :
+1. Returns Minimum Spanning Arborescence in case of directed graph
+2. Assumes directed graphs, so if you want MST on undirected graph, pass (Graph.symmetricClosure graph)
+
+-}
 kruskal : (Graph.Edge e -> number) -> Graph.Graph n e -> Graph.Graph n e
 kruskal weightFn g =
     let

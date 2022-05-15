@@ -1,12 +1,25 @@
-module Random.Graph exposing (simpleConnectedGraph, simpleConnectedGraphWithRandomNodeEdgeLabels)
+module Random.Graph exposing
+    ( simpleConnectedGraph
+    , simpleConnectedGraphWithRandomNodeEdgeLabels
+    )
 
-{-| -}
+{-| This module is useful for generating a random graph with given number of edges and nodes.
+
+#Generators
+
+@docs simpleConnectedGraph
+
+@docs simpleConnectedGraphWithRandomNodeEdgeLabels
+
+-}
 
 import Graph as G
 import Random as R
 import Random.List as RL
 
 
+{-| Similar to simpleConnectedGraph, also generates edge labels and node labels using the given generator.
+-}
 simpleConnectedGraphWithRandomNodeEdgeLabels : Int -> Int -> R.Generator n -> R.Generator e -> R.Generator (G.Graph n e)
 simpleConnectedGraphWithRandomNodeEdgeLabels nodesCnt edgesCnt nodeLabelGenerator edgeLabelGenerator =
     simpleConnectedGraph nodesCnt edgesCnt
@@ -30,6 +43,9 @@ simpleConnectedGraphWithRandomNodeEdgeLabels nodesCnt edgesCnt nodeLabelGenerato
 
 
 {-| This function generates a random graph that is connected if number of edges >= number of nodes - 1
+
+_Note_: You can also generate random trees, just pass edge count as n-1.
+
 -}
 simpleConnectedGraph : Int -> Int -> R.Generator ( List Int, List ( Int, Int ) )
 simpleConnectedGraph nodeCnt edgeCnt =

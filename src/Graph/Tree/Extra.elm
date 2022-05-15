@@ -1,17 +1,29 @@
-module Graph.Tree.Extra exposing (..)
+module Graph.Tree.Extra exposing (toGraph)
+
+{-| This module implements additional convenience functions to work with the
+[elm-community/graph.tree](https://package.elm-lang.org/packages/elm-community/graph/latest/Graph-Tree)
+
+_Note_: please open a issue on github if you find any:
+
+1.  Any bugs in implementation
+2.  Request for adding a new convenience function to the package.
+
+
+# API
+
+@docs toGraph
+
+-}
 
 import Fifo exposing (..)
 import Graph
 import Graph.Tree exposing (Tree, root)
 
 
-
-{- This function takes a elm-community/Graph.Tree tree, converts the
-   Tree into a elm-community/Graph Graph, which can then easily visualised using
-   the Render module we wrote earlier
+{-| This function takes a elm-community/Graph.Tree tree, converts the
+Tree into a elm-community/Graph Graph, which can then easily visualised using
+the Render module present in [goyalarchit/elm-dagre](https://package.elm-lang.org/packages/goyalarchit/elm-dagre/latest/)
 -}
-
-
 toGraph : Graph.Tree.Tree label -> Graph.Graph label ()
 toGraph tree =
     let
