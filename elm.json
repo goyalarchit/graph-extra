@@ -3,7 +3,7 @@
     "name": "goyalarchit/graph-extra",
     "summary": "Convenience functions/Random generators for working with elm-community/graph.",
     "license": "BSD-3-Clause",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "exposed-modules": [
         "Graph.Extra",
         "Graph.Tree.Extra",
@@ -11,16 +11,16 @@
     ],
     "elm-version": "0.19.0 <= v < 0.20.0",
     "dependencies": {
-            "TSFoster/elm-heap": "2.1.2 <= v < 3.0.0",
-            "avh4/elm-fifo": "1.0.4 <= v < 2.0.0",
-            "elm/browser": "1.0.2 <= v < 2.0.0",
-            "elm/core": "1.0.5 <= v < 2.0.0",
-            "elm/html": "1.0.0 <= v < 2.0.0",
-            "elm/random": "1.0.0 <= v < 2.0.0",
-            "elm-community/graph": "6.0.0 <= v < 7.0.0",
-            "elm-community/intdict": "3.0.0 <= v < 4.0.0",
-            "elm-community/list-extra": "8.5.2 <= v < 9.0.0",
-            "elm-community/random-extra": "3.2.0 <= v < 4.0.0"
+        "TSFoster/elm-heap": "2.1.2 <= v < 3.0.0",
+        "avh4/elm-fifo": "1.0.4 <= v < 2.0.0",
+        "elm/browser": "1.0.2 <= v < 2.0.0",
+        "elm/core": "1.0.5 <= v < 2.0.0",
+        "elm/html": "1.0.0 <= v < 2.0.0",
+        "elm/random": "1.0.0 <= v < 2.0.0",
+        "elm-community/graph": "6.0.0 <= v < 7.0.0",
+        "elm-community/intdict": "3.0.0 <= v < 4.0.0",
+        "elm-community/list-extra": "8.5.2 <= v < 9.0.0",
+        "elm-community/random-extra": "3.2.0 <= v < 4.0.0"
     },
     "test-dependencies": {}
 }
