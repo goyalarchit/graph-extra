@@ -3,7 +3,7 @@
     "name": "goyalarchit/graph-extra",
     "summary": "Sugiyama Style graph drawing in pure elm.",
     "license": "BSD-3-Clause",
-    "version": "2.0.0",
+    "version": "1.0.0",
     "exposed-modules": [
         "Graph.Extra",
         "Graph.Tree.Extra",
